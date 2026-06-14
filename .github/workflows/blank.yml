@@ -23,10 +23,26 @@ jobs:
       run: |
         flutter create my_agent_app --org com.googleai.agent
         cd my_agent_app
-        echo "dependencies:" > pubspec.yaml
-        echo "  flutter:" >> pubspec.yaml
-        echo "    sdk: flutter" >> pubspec.yaml
-        echo "  webview_flutter: ^4.4.2" >> pubspec.yaml
+        
+        # Menulis ulang pubspec.yaml dengan format lengkap agar tidak error SDK
+        cat << 'EOF' > pubspec.yaml
+        name: my_agent_app
+        description: "A new Flutter project."
+        publish_to: 'none'
+        version: 1.0.0+1
+
+        environment:
+          sdk: '>=3.0.0 <4.0.0'
+
+        dependencies:
+          flutter:
+            sdk: flutter
+          webview_flutter: ^4.4.2
+
+        flutter:
+          uses-material-design: true
+        EOF
+        
         flutter pub get
 
     - name: Build APK
