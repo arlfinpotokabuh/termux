@@ -18,13 +18,13 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
+        flutter-version: '3.38.1'
 
     - name: Create Webview Wrapper App
       run: |
         flutter create my_agent_app --org com.googleai.agent
         cd my_agent_app
         
-        # Menulis ulang pubspec.yaml dengan format lengkap agar tidak error SDK
         cat << 'EOF' > pubspec.yaml
         name: my_agent_app
         description: "A new Flutter project."
@@ -32,7 +32,7 @@ jobs:
         version: 1.0.0+1
 
         environment:
-          sdk: '>=3.0.0 <4.0.0'
+          sdk: '>=3.38.0 <4.0.0'
 
         dependencies:
           flutter:
